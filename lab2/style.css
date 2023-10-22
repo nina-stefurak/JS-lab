@@ -1,82 +1,95 @@
 body {
-    display: grid;
-    place-items: center;
-    height: 100vh;
-}
-
-.wrapper {
-    width: 1000px;
-    border: 5px solid #9f9f9f70;
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-
-#slider {
-    width: 600px;
-    height: 400px;
-    margin: 100px auto 0 auto;
-    overflow: hidden;
-}
-#slider .slides {
-    display: flex;
-    animation-name: pociag-w-lewo;
-    animation-duration: 4s;
-    animation-delay: 1s;
-    animation-timing-function: ease-in-out;
-}
-
-@keyframes pociag-w-lewo {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-2000px);
-    }
-}
-
-a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
+  background: #f6f7fc;
   }
   
-  a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .previous {
-    background-color: #f1f1f1;
-    color: black;
-  }
-  
-  .next {
-    background-color: #04AA6D;
-    color: white;
-  }
-  
-  .round {
-    border-radius: 50%;
-  }
-
-  .dots {
-    display: flex;
-    gap: 10px;
+.container {
+  padding: 2rem;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    background-color: #333;
-    border-radius: 50%;
-    cursor: pointer;
+.slider-wrapper {
+  position: relative;
+  max-width: 48rem;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
+  border-radius: 0.5rem;
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+.slides {
+  display: flex;
+  aspect-ratio: 16/9;
 }
+
+.slider-wrapper .slides {
+  transition: all 0.4s ease;
+}
+
+.slides img {
+  flex: 1 0 100%;
+  object-fit: cover;
+}
+
+/* buttons */
+
+/*  */
+button{
+  background: none;
+  border: none;
+}
+
+button:hover {
+  opacity: 100%;
+}
+/* button:hover::after { */
+  /* opacity: 100%; */
+/* } */
+
+
+.round {
+  position:absolute;
+  border-radius: 50%;
+  top:50%;
+  z-index: 10;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: #fff;
+  opacity: 0.75;
+  cursor: pointer;
+  transition: opacity ease 250ms;
+}
+
+
+.prev{
+  left:3rem;
+  transform: translate(-50%, -50%);
+}
+.next{
+  right: 3rem;
+  transform: translate(50%, -50%); 
+}
+
+/* dots */
+.dots-container {
+  display: flex;
+  column-gap: 1rem;
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform:translateX(-50%);
+  z-index: 1;
+}
+
+.dots-container .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.75;
+  cursor: pointer;
+  transition: opacity ease 250ms;
+}
+
+.dots-container .dot:hover {
+  opacity: 100%;
+}
+

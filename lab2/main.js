@@ -1,36 +1,31 @@
-// notatnik z zajęć
+const container = document.querySelector(".container"),
+slides = document.querySelector(".slides"),
+images = document.querySelectorAll("img"),
+buttons = document.querySelectorAll(".btn");
 
-const main = document.querySelector('main')
-const wrapper = document.querySelector('wrapper')
-const slides = document.querySelector('.slides')
-const previous = document.querySelector(".previousButton");
-const next = document.querySelector(".nextButton");
+let currentSlide = 1,
+    intervalId;
 
+const autoSlide = () => {
+    intervalId = setInterval(() => slideImage(++currentSlide), 2000);
+};
+autoSlide();
 
-// jednorazowe wykonanie kodu po określonym czasie
-const timeoutRef = setTimeout(
-    () => {
-        slides.style.transform = 'translate(-100px)'
-        slides.classList.add('slide2')
-        main.innerHTML = 'Msg from setTimeout'
-    },
-    2000
-)
+const slideImage = () => {
+    currentSlide = currentSlide === images.length ? 0 : currentSlide < 0 ? images.length - 1 : currentSlide;
 
-// wykonywanie kodu co określony czas
-let licznik = 0
-const intervalRef = setInterval(
-    () => {
-        main.innerHTML = `Msg from setInterval: ${licznik++}`
-    },
-    4000
-)
+slides.style.transform = `translate(-${currentSlide * 100}%)`;
+};
 
-// kasujemy setInterval
-// clearInterval(intervalRef)
+const updateClick = (e) => {
 
-// kasujemy setTimeout
-// clearTimeout(intervalRef)
+    clearInterval(intervalId);
+    currentSlide += e.target.id === "next" ? 1 : -1;
+    slideImage(currentSlide);
+    autoSlide();
+};
 
+buttons.forEach(btn => btn.addEventListener("click", updateClick))
 
-// window.requestAnimationFrame
+container.addEventListener("mouseover", () => clearInterval(intervalId));
+container.addEventListener("mouseleave", autoSlide);

@@ -5,37 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" >
+    
 </head>
 
 <body>
-    <div class="wrapper">
-
-        <div class="controls">
-            <a href="#" class="previousButton">&#8249;</a>
-            <div class="dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-            <a href="#" class="nextButton">&#8250;</a>
-        </div>
-        
-        <div id="slider">
-            <div class="slides">
-                <img src="http://picsum.photos/seed/picsum/600/400" alt="">
-                <img src="http://picsum.photos/seed/picsum/600/400" alt="">
-                <img src="http://picsum.photos/seed/picsum/600/400" alt="">
-                <img src="http://picsum.photos/seed/picsum/600/400" alt="">
-                <img src="http://picsum.photos/seed/picsum/600/400" alt="">
-                <img src="http://picsum.photos/seed/picsum/600/400" alt="">
-            </div>
-
-    </div>
-    </div>
     <main>
     </main>
-    <script src="main.js"></script>
+    <section class="container">
+    <div class="slider-wrapper">
+        <div class="slides">
+            <img id="slide-1" src="./img/galaxy-3608029_1280.jpg" alt="Photo2"/> 
+            <img id="slide-2" src="./img/galaxy-11188_1280.jpg" alt="Photo1"/>
+        	<img id="slide-3" src="./img/lagoon-nebula-11143_1280.jpg" alt="Photo3"/>
+        	<img id="slide-4" src="./img/moon-2048727_1280.jpg" alt="Photo4"/>
+            <!-- https://source.unsplash.com/ -->
+        </div>
+        <button id="prev" class="prev round btn">&#8249;</button>
+        <button id="next" class="next round btn">&#8250;</button>
+
+        <div class="dots-container">
+            <span class="btn1 dot"></span>
+            <span class="btn2 dot"></span>
+            <span class="btn3 dot"></span>
+            <span class="btn4 dot"></span>
+        </div>
+    </div>
+
+</section>
+<script src="main.js"></script>
 </body>
 
 </html>
