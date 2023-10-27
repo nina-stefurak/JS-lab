@@ -31,7 +31,6 @@ body {
 
 /* buttons */
 
-/*  */
 button{
   background: none;
   border: none;
@@ -91,5 +90,9 @@ button:hover {
 
 .dots-container .dot:hover {
   opacity: 100%;
+}
+
+.dot.active {
+  opacity: 1;
 }
 
