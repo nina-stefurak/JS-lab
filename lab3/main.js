@@ -1,18 +1,22 @@
-document.addEventListener('keypress', onKeyPress)
-
-const KeyToSound = {
-    'a': document.querySelector('#s1'),
-    's': document.querySelector('#s2')
-}
-
-function onKeyPress(event) {
-    const sound = KeyToSound[event.key]
-    playSound(sound)
-}
 function playSound(sound) {
-    sound.currentTime = 0
-    sound.play()
-}
+    const audio = document.querySelector(`audio[data-key="${sound.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${sound.keyCode}"]`);
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.classList.add('playing');
+  }
+  
+  function removeTransition(sound) {
+    if (sound.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
+  
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
+  window.addEventListener('keydown', playSound);
 
-const clap = document.querySelector('#s1')
-clap.play()
+const records = {};
+
+  // window.addEventListener('mousedown', playSound);
