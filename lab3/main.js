@@ -1,5 +1,3 @@
-
-  // Existing playSound function
 function playSound(sound) {
   const audio = document.querySelector(`audio[data-key="${sound.keyCode}"]`);
   const key = document.querySelector(`.key[data-key="${sound.keyCode}"]`);
@@ -14,13 +12,11 @@ function playSound(sound) {
   }
 }
 
-// Initialize recording variables
 let isRecording = false;
 let recordStartTime;
 let currentChannel = 1;
 const records = { 1: [], 2: [], 3: [], 4: [] };
 
-// Function to start recording
 function startRecording(channel) {
   isRecording = true;
   currentChannel = channel;
@@ -28,12 +24,10 @@ function startRecording(channel) {
   recordStartTime = Date.now();
 }
 
-// Function to stop recording
 function stopRecording() {
   isRecording = false;
 }
 
-// Function to play back a record
 function playRecord(channel) {
   records[channel].forEach(note => {
       setTimeout(() => {
@@ -43,7 +37,6 @@ function playRecord(channel) {
   });
 }
 
-// Attach event listeners to buttons
 document.getElementById('recordChannel1').addEventListener('click', () => startRecording(1));
 document.getElementById('stopChannel1').addEventListener('click', stopRecording);
 document.getElementById('playChannel1').addEventListener('click', () => playRecord(1));
@@ -65,8 +58,6 @@ document.getElementById('playAllChannels').addEventListener('click', () => {
 });
 
 
-
-// Existing code for key press and transition end events
 window.addEventListener('keydown', playSound);
 const keys = document.querySelectorAll('.key');
 keys.forEach(key => key.addEventListener('transitionend', removeTransition));
