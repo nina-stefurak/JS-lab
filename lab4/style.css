@@ -1,0 +1,167 @@
+html {
+    height: 100%;
+  }
+  body {
+    background-color: #f4f5f2;
+    height: 100%;
+  }
+  .section {
+      padding: 50px 0;
+      margin: 0 auto;
+      max-width: 70%;
+  }
+
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+}
+.color-type, input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%;
+    border: none;
+}
+.color-type {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: relative;
+    outline: none;
+}
+
+input[type="checkbox"],
+input[type="color"] {
+    margin-left: 0.5em;
+    margin-right: 1.9em;
+}
+
+
+/* * {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #eee;
+}
+
+.note-list {
+    width: 600px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    text-align: center;
+    margin: 10px auto;
+    box-shadow: 0 0 10px #777;
+}
+
+#list {
+    width: 100%;
+    padding: 20px;
+}
+
+li {
+    margin-top: 20px;
+}
+
+.notes {
+    display: inline-block
+}
+
+#add-note,
+#edit-note {
+    position: fixed;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    border: 1px solid #000;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px #777;
+}
+
+#add-note {
+    left: 200px;
+}
+
+#edit-note {
+    right: 200px;
+}
+
+label {
+    font-weight: bold;
+    padding: 10px 0 5px 0;
+}
+
+textarea {
+    max-width: 250px;
+    min-height: 80px;
+}
+
+input[type="color"] {
+    width: 50px;
+    margin: 0 auto;
+}
+
+#add-note-btn,
+#edit-note-btn {
+    width: 250px;
+    margin-top: 20px;
+    height: 30px;
+    background: #fff;
+    font-weight: bold;
+    border: 2px solid #000;
+    border-radius: 7px;
+}
+
+#add-note-btn:hover,
+#edit-note-btn:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+#add-note-btn:active,
+#edit-note-btn:active {
+    transform: scale(0.9);
+}
+
+#remove-all-notes {
+    width: 200px;
+    padding: 5px 3px;
+    margin: 2px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+#remove-all-notes:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+#remove-all-notes:active {
+    transform: scale(0.9);
+}
+
+.remove-note-btn,
+.edit-note-btn {
+    width: 120px;
+    padding: 5px 3px;
+    margin: 2px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.remove-note-btn:hover,
+.edit-note-btn:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+.remove-note-btn:active,
+.edit-note-btn:active {
+    transform: scale(0.9);
+} */

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotesApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="columns">
+        <div class="column">
+            <div class="section">
+                <h1 class="title">Utwórz notatkę</h1>
+                <form class="card-form">
+                    <div class="field is-grouped">
+                        <p class="control is-expanded">
+                            <input class="input" type="text" placeholder="Tytuł">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Treść"></textarea>
+                        </div>
+                    </div>
+                    <div class="field is is-grouped">
+                        <label for="color">Kolor</label>
+            <input type="color" id="color" class="color-type" value="#cce6ff">
+            <label for="pinned">Przypinanie</label>
+            <input type="checkbox" id="pinned">
+                    </div>
+                    <div class="field is-grouped">
+                        
+                        <div class="control">
+                            <button type="submit" class="button is-info">
+                                Dodaj notatkę
+                            </button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-text active-modal delete-notes">
+                                Usuń wszystkie notatki
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="column">
+            <div class="section">
+                <div class="card-list"></div>
+            </div>
+        </div>
+    </section>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.css">
+
+    <script src="main.js"></script>
+</body>
+
+</html>
