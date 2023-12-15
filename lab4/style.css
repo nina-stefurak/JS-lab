@@ -1,167 +1,150 @@
-html {
+html, body {
     height: 100%;
-  }
-  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
     background-color: #f4f5f2;
-    height: 100%;
-  }
-  .section {
-      padding: 50px 0;
-      margin: 0 auto;
-      max-width: 70%;
-  }
+}
 
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
+.container {
+    display: flex;
+    max-width: 100%;
+    padding: 20px;
+    justify-content: space-around;
 }
-.color-type, input[type="color"]::-webkit-color-swatch {
-    border-radius: 50%;
+
+.note-creation-section, .notes-display-section {
+    flex: 1;
+    padding: 10px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.title {
+    font-size: 24px;
+    color: #363636;
+}
+
+.input, .textarea, .search-box {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.textarea {
+    min-height: 150px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #209cee;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
 }
-.color-type {
-    width: 28px;
+
+.button:hover {
+    filter: brightness(0.85);
+}
+
+.picker-and-pin-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.color-picker-container,
+.pin-container {
+    display: flex;
+    align-items: center;
+}
+
+.color-picker-container label,
+.pin-container label {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.color-picker {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    width: 30px;
     height: 28px;
     border-radius: 50%;
-    position: relative;
-    outline: none;
+    cursor: pointer;
+    background: transparent;
 }
 
-input[type="checkbox"],
-input[type="color"] {
-    margin-left: 0.5em;
-    margin-right: 1.9em;
-}
-
-
-/* * {
-    margin: 0;
+.color-picker::-webkit-color-swatch-wrapper {
     padding: 0;
 }
 
-body {
-    background: #eee;
+.color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
 }
 
-.note-list {
-    width: 600px;
-    padding: 20px;
-    margin: 0 auto;
-    border: 1px solid #000;
-    text-align: center;
-    margin: 10px auto;
-    box-shadow: 0 0 10px #777;
+.notes-list {
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
 }
 
-#list {
-    width: 100%;
-    padding: 20px;
+.note {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px auto; 
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 5px solid transparent;
+    max-width: 600px; 
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
-li {
-    margin-top: 20px;
-}
-
-.notes {
-    display: inline-block
-}
-
-#add-note,
-#edit-note {
-    position: fixed;
-    top: 100px;
+.note-header {
     display: flex;
-    flex-direction: column;
-    width: 250px;
-    border: 1px solid #000;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 10px #777;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#add-note {
-    left: 200px;
+
+.note-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
 }
 
-#edit-note {
-    right: 200px;
+.note-footer-right .date {
+    margin: 10px;
 }
 
-label {
-    font-weight: bold;
-    padding: 10px 0 5px 0;
-}
-
-textarea {
-    max-width: 250px;
-    min-height: 80px;
-}
-
-input[type="color"] {
-    width: 50px;
-    margin: 0 auto;
-}
-
-#add-note-btn,
-#edit-note-btn {
-    width: 250px;
-    margin-top: 20px;
-    height: 30px;
-    background: #fff;
-    font-weight: bold;
-    border: 2px solid #000;
-    border-radius: 7px;
-}
-
-#add-note-btn:hover,
-#edit-note-btn:hover {
-    filter: brightness(0.8);
+.edit-button, .delete-button, .pinned {
+    border: none;
+    background: none;
     cursor: pointer;
+    color: #333; 
 }
 
-#add-note-btn:active,
-#edit-note-btn:active {
-    transform: scale(0.9);
+.edit-button:hover, .delete-button:hover {
+    color: #666;
 }
 
-#remove-all-notes {
-    width: 200px;
-    padding: 5px 3px;
-    margin: 2px;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 6px;
-    font-weight: bold;
+.pinned {
+    color: rgba(46, 0, 0, 0.696);
 }
-
-#remove-all-notes:hover {
-    filter: brightness(0.8);
-    cursor: pointer;
+@media screen and (max-width: 600px) {
+    .container {
+        flex-direction: column;
+    }
 }
-
-#remove-all-notes:active {
-    transform: scale(0.9);
-}
-
-.remove-note-btn,
-.edit-note-btn {
-    width: 120px;
-    padding: 5px 3px;
-    margin: 2px;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-.remove-note-btn:hover,
-.edit-note-btn:hover {
-    filter: brightness(0.8);
-    cursor: pointer;
-}
-
-.remove-note-btn:active,
-.edit-note-btn:active {
-    transform: scale(0.9);
-} */

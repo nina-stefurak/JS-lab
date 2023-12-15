@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="container">
-        <div id="ball"></div>
-        <button onclick="start()" id="start">Start</button>
-        <button onclick="restart()" id = "restart" hidden>Try again!!</button>
+    <div class="game-controls">
+        <button onclick="startGame()" id="startButton">Start Game</button>
+        <button onclick="restartGame()" id="restartButton">Restart Game</button>
     </div>
-
+    <div class="game-container">
+        <div id="ball"></div>
+        <div id="hole"></div>
+        <div id="timer">Time: 60</div>
+        <div id="score">Score: 0</div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
+
+<!-- Ball in hole -->

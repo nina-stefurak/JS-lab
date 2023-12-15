@@ -1,47 +1,108 @@
-let ball= document.querySelector("#ball");   
-let container = document.getElementsByClassName("container")[0];
-let holes = [];
-let startGame = false;
-let speedX = 0, speedY = 0;
-let posX = 20, posY = 20;
+let ball = document.getElementById("ball");
+let hole = document.getElementById("hole");
+let timerElement = document.getElementById("timer");
+let scoreElement = document.getElementById("score");
+let startButton = document.getElementById("startButton");
+let restartButton = document.getElementById("restartButton");
+let container = document.querySelector(".game-container");
+let gameStart = false;
+let score = 0;
+let timeLeft = 60;
+let interval;
 
-window.addEventListener('deviceorientation', onDeviceMove)
-
-function start(){
+function startGame() {
     gameStart = true;
-    spawnHoles();
+    score = 0;
+    timeLeft = 60;
+    ball.style.left = "10px";
+    ball.style.top = "10px";
+    startButton.style.display = "none";
+    restartButton.style.display = "none";
+    updateScore();
+    updateTimer();
     moveBall();
-    console.log("game Started!")
-    document.getElementById("start").hidden=true;
-    counter = document.createElement('span'); //punkty 
-    counter.classList.add("counter");
-    container.appendChild(counter);
+    spawnHole();
+    countDown();
 }
 
-function restart(){
-    startGame = true;
-    for(i = container.childElementCount; i > 0; i--){
-        if(container.childNodes[i].nodeName == "DIV"){
-            if(container.childNodes[i].id !== "ball"){
-                container.removeChild(container.childNodes[i])
-            }
-        }
+function restartGame() {
+    clearInterval(interval);
+    gameStart = true;
+    score = 0;
+    timeLeft = 60;
+    ball.style.left = "10px";
+    ball.style.top = "10px";
+    updateScore();
+    updateTimer();
+    spawnHole();
+    countDown();
+}
+
+function moveBall() {
+    window.addEventListener('deviceorientation', (event) => {
+        let x = Math.max(Math.min(event.gamma, 45), -45) / 45 * (container.offsetWidth - ball.offsetWidth);
+        let y = Math.max(Math.min(event.beta, 45), -45) / 45 * (container.offsetHeight - ball.offsetHeight);
+        ball.style.left = x + 'px';
+        ball.style.top = y + 'px';
+        checkCollision();
+    });
+}
+
+function spawnHole() {
+    let x, y;
+    do {
+        x = Math.random() * (container.offsetWidth - hole.offsetWidth);
+        y = Math.random() * (container.offsetHeight - hole.offsetHeight);
+    } while (isTooCloseToBall(x, y));
+
+    hole.style.left = x + 'px';
+    hole.style.top = y + 'px';
+}
+
+function isTooCloseToBall(x, y) {
+    const minDistance = 50;
+    let ballX = parseInt(ball.style.left, 10);
+    let ballY = parseInt(ball.style.top, 10);
+
+    return Math.abs(ballX - x) < minDistance && Math.abs(ballY - y) < minDistance;
+}
+
+function checkCollision() {
+    let ballRect = ball.getBoundingClientRect();
+    let holeRect = hole.getBoundingClientRect();
+    if (ballRect.left < holeRect.left + holeRect.width &&
+        ballRect.left + ballRect.width > holeRect.left &&
+        ballRect.top < holeRect.top + holeRect.height &&
+        ballRect.height + ballRect.top > holeRect.top) {
+        score++;
+        updateScore();
+        spawnHole();
     }
-
-    holes = [];
-    posX = 20, posY = 20;
-    spawnHoles();
-    moveBall();
-    console.log("game Started!")
-    document.getElementById("restart").hidden = true;
 }
-// function onDeviceMove(event) {
-//     console.log(event)
-// }
 
-// function animate() {
-//     //    console.log(Date.now())
-//     // requestAnimationFrame(animate)
-// }
+function updateScore() {
+    scoreElement.innerText = "Score: " + score;
+}
 
-// requestAnimationFrame(animate)
+function updateTimer() {
+    timerElement.innerText = "Time: " + timeLeft;
+}
+
+function countDown() {
+    interval = setInterval(() => {
+        if (!gameStart) {
+            clearInterval(interval);
+            startButton.style.display = "inline";
+            restartButton.style.display = "inline";
+            return;
+        }
+        timeLeft--;
+        updateTimer();
+        if (timeLeft <= 0) {
+            gameStart = false;
+            clearInterval(interval);
+            restartButton.style.display = "inline";
+            alert("Game over! Your score: " + score);
+        }
+    }, 1000);
+}

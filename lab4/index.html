@@ -1,62 +1,44 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NotesApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="container">
+        <section class="note-creation-section">
+            <h1 class="title">Utwórz notatkę</h1>
+            <form class="note-form">
+                <input class="input" type="text" placeholder="Tytuł" id="noteTitle">
+                <textarea class="textarea" placeholder="Treść" id="noteContent"></textarea>
 
-    <section class="columns">
-        <div class="column">
-            <div class="section">
-                <h1 class="title">Utwórz notatkę</h1>
-                <form class="card-form">
-                    <div class="field is-grouped">
-                        <p class="control is-expanded">
-                            <input class="input" type="text" placeholder="Tytuł">
-                        </p>
+                <div class="picker-and-pin-container">
+                    <div class="color-picker-container">
+                        <label for="noteColor">Wybierz kolor:</label>
+                        <input type="color" class="color-picker" id="noteColor">
                     </div>
-                    <div class="field">
-                        <div class="control">
-                            <textarea class="textarea" placeholder="Treść"></textarea>
-                        </div>
+
+                    <div class="pin-container">
+                        <label for="notePinned">Przypnij:</label>
+                        <input type="checkbox" id="notePinned">
                     </div>
-                    <div class="field is is-grouped">
-                        <label for="color">Kolor</label>
-            <input type="color" id="color" class="color-type" value="#cce6ff">
-            <label for="pinned">Przypinanie</label>
-            <input type="checkbox" id="pinned">
-                    </div>
-                    <div class="field is-grouped">
-                        
-                        <div class="control">
-                            <button type="submit" class="button is-info">
-                                Dodaj notatkę
-                            </button>
-                        </div>
-                        <div class="control">
-                            <button class="button is-text active-modal delete-notes">
-                                Usuń wszystkie notatki
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="column">
-            <div class="section">
-                <div class="card-list"></div>
-            </div>
-        </div>
-    </section>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.css">
+                </div>
+
+                <input type="text" class="input" placeholder="Tagi (oddzielone przecinkami)" id="noteTags">
+                <button type="submit" class="button is-info">Dodaj notatkę</button>
+            </form>
+        </section>
+
+        <section class="notes-display-section">
+            <input type="text" class="input search-box" placeholder="Szukaj notatek">
+            <div class="notes-list"></div>
+        </section>
+    </div>
 
     <script src="main.js"></script>
 </body>
-
 </html>
