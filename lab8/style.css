@@ -1,0 +1,93 @@
+body{
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    padding-top: 75px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+}
+
+#removeCity {
+    margin: 10px auto;
+    padding: 5px 20px;
+    border: 2px solid #3690cc;
+    border-radius: 5px;
+    background-color: #3690cc2a;
+    color: rgb(48, 48, 48);
+    cursor: pointer;
+    align-self: center; /* Centruje przycisk */
+}
+
+#removeCity:hover {
+    background-color: #3690cc;
+    color: white;
+}
+
+  .form {
+    border: 2px solid #3690cc;
+    padding: 5px 20px;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+  }
+
+  #searchButton {
+    padding: 5px 5px;
+    border: 2px solid #3690cc;
+    border-radius: 3px;
+    background-color: transparent;
+    border-radius: 0 5px 5px 0;
+    border-left: none;
+    color: rgb(48, 48, 48);
+    cursor: pointer;
+}
+
+#searchButton i {
+    font-size: 14px; 
+}
+
+#searchButton:hover {
+    background-color: #3690cc;
+    color: white;
+}
+
+.weather-container {
+    margin-top: 50px; 
+    width: 70%;
+    max-width: 600px; 
+    padding: 20px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 600px) {
+    .form, #searchButton {
+        width: auto;
+    }
+
+    #removeCity {
+        width: 30%;
+        margin-top: 10px;
+        padding: 5px;
+    }
+
+    .search-bar {
+        flex-direction: row; 
+        width: 100%;
+    }
+}
+
+
+
+
+
