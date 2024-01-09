@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:200,400,600,700,800');
+
+h1 {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-size: 29px;
+    color: #323d70;
+  }
+
+  .text{
+    font-family: 'Space Mono', Helvetica, sans-serif;
+    font-size: 14px;
+    color: #333;
+  }
 body{
     background-color: #f4f4f4;
     margin: 0;
@@ -16,24 +30,23 @@ body{
 }
 
 #removeCity {
-    margin: 10px auto;
+    margin: 2rem auto;
     padding: 5px 20px;
-    border: 2px solid #3690cc;
+    border: 2px solid #3690cc2c;
     border-radius: 5px;
-    background-color: #3690cc2a;
     color: rgb(48, 48, 48);
     cursor: pointer;
     align-self: center; /* Centruje przycisk */
 }
 
 #removeCity:hover {
-    background-color: #3690cc;
+    background-color: #3690cc2c;
     color: white;
 }
 
   .form {
     border: 2px solid #3690cc;
-    padding: 5px 20px;
+    padding: 5px 70px;
     border-right: none;
     border-radius: 5px 0 0 5px;
     outline: none;
@@ -60,6 +73,20 @@ body{
 }
 
 .weather-container {
+    grid-column: 1/4;
+    margin: 50px auto;
+    width: 40%;
+    max-width: 500px; 
+    text-align: center;
+    background: white;
+    border-radius: 4px;
+    padding: 15px 100px;
+  }
+
+  .important-info{ 
+    grid-column: 1;
+  }
+/* .weather-container {
     margin-top: 50px; 
     width: 70%;
     max-width: 600px; 
@@ -67,7 +94,7 @@ body{
     background-color: white;
     border-radius: 3px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 
 @media (max-width: 600px) {
@@ -88,6 +115,8 @@ body{
 }
 
 
-
+a {
+    margin: 1rem;
+}
 
 
