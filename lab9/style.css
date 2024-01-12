@@ -1,7 +1,5 @@
-
-
 .bar{
-    padding: 15px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,26 +7,38 @@
 
 input[type=number] {
     width: 100%;
-    padding: 8px 7px;
-    margin: 6px 0;
+    padding: 5px 2px;
+    margin: 3px 0;
     box-sizing: border-box;
   }
 
 button {
-    margin: 6px 4px;
+    width: 100px;;
+    margin: 4px 4px;
     margin-bottom: 20px;
     background-color: white; 
     color: black; 
     border: 2px solid #008CBA;
     border-radius: 2px;
-    padding: 10px 26px;
+    padding: 7px 20px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #008CBA;
     color: white;
   }
+
+#reset-btn {
+    border: 2px solid #8d00005d;
+    transition: background-color 0.4s ease; 
+}
+
+#reset-btn:hover {
+    background-color: #8d000087; 
+    color: white; 
+}
