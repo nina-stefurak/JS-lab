@@ -39,6 +39,14 @@ document.getElementById('searchButton').addEventListener('click', async ()=>{
     updateCitiesMenu();
 });
 
+//przycisk usuń ostatnie miasto
+// function removeLastCity() {
+//     // 
+// }
+
+// document.getElementById('removeCity').addEventListener('click', function() {
+//     removeLastCity();
+// });
 
 
 function getCitiesFromLocalStorage() {
@@ -51,15 +59,15 @@ function updateCitiesMenu() {
     cities.forEach(cityName => {
         menu += `<a id='${cityName}' href='#'>${cityName}</a>`;
     });
-    document.getElementById('cities').innerHTML = `
-    ${menu}
-    `;
+    document.getElementById('cities').innerHTML = `${menu}`;
     cities.forEach(cityId => {
         document.getElementById(cityId).addEventListener('click', async () => {
             await updateWeather(cityId);
         });
     })
 }
+
+//dodać if do citiesMenu, żeby uniknąć powtórzenia 
 
 updateCitiesMenu();
 const firstCity = getCitiesFromLocalStorage()[0];

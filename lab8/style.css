@@ -16,7 +16,7 @@ body{
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
-    padding-top: 75px;
+    padding-top: 30px;
   }
   .container {
     display: flex;
@@ -33,7 +33,7 @@ body{
     margin: 2rem auto;
     padding: 5px 20px;
     border: 2px solid #3690cc2c;
-    border-radius: 5px;
+    border-radius: 4px;
     color: rgb(48, 48, 48);
     cursor: pointer;
     align-self: center; /* Centruje przycisk */
@@ -46,9 +46,9 @@ body{
 
   .form {
     border: 2px solid #3690cc;
-    padding: 5px 70px;
+    padding: 5px 20px;
     border-right: none;
-    border-radius: 5px 0 0 5px;
+    border-radius: 4px 0 0 4px;
     outline: none;
   }
 
@@ -74,7 +74,7 @@ body{
 
 .weather-container {
     grid-column: 1/4;
-    margin: 50px auto;
+    margin: 5px auto;
     width: 40%;
     max-width: 500px; 
     text-align: center;
@@ -95,6 +95,20 @@ body{
     border-radius: 3px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 } */
+a:link, a:visited {
+  background-color:#5183bb7d;
+  color: white;
+  padding: 6px 14px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 3px;
+  margin: 5px;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #5182bbb3;
+}
 
 
 @media (max-width: 600px) {
@@ -103,7 +117,7 @@ body{
     }
 
     #removeCity {
-        width: 30%;
+        width: 50%;
         margin-top: 10px;
         padding: 5px;
     }
