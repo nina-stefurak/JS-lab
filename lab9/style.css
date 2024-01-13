@@ -1,3 +1,7 @@
+#canvas {
+    /* background-color:#abbaab; */
+    background: radial-gradient(#cbd5cb, #abbaab);
+}
 .bar{
     padding: 10px;
     display: flex;
