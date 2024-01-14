@@ -1,15 +1,47 @@
 const apiKey = '5134d627e2df6937d6d89fcd761a4817';
+const FIVE_MINUTES = 5 * 60 * 1000;
 
 function getCityName() {
     return document.getElementById('cityName').value;
 }
 
+
+async function cacheWeatherData(cityName, data) {
+    const cache = await caches.open('weatherData');
+    const cacheData = {
+        timestamp: Date.now(),
+        data: data
+    };
+    await cache.put(cityName, new Response(JSON.stringify(cacheData)));
+}
+
+
+async function getWeatherDataFromCache(cityName) {
+    const cache = await caches.open('weatherData');
+    const cachedResponse = await cache.match(cityName);
+    if (cachedResponse) {
+        const cacheData = await cachedResponse.json();
+        const cacheAge = Date.now() - cacheData.timestamp;
+
+        if (cacheAge < FIVE_MINUTES) { 
+            return cacheData.data;
+        }
+    }
+    return null;
+}
+
+
 async function getWeather(city, apiKeyWeather) {
+    const cachedWeatherData = await getWeatherDataFromCache(city);
+    if(cachedWeatherData) {
+        return cachedWeatherData;
+    }
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyWeather}&units=metric`);
     if (!response.ok){
         alert(`Problem z pobraniem pogody dla ${city}`)
     }
     const data = await response.json();
+    cacheWeatherData(city, data);
     return data;
 }
 
@@ -29,28 +61,47 @@ async function updateWeather(cityName) {
     const weather = await getWeather(cityName, apiKey);
     displayWeather(weather);
 }
+const searchButton = document.getElementById('searchButton');
 
-document.getElementById('searchButton').addEventListener('click', async ()=>{
+async function onSearchButtonClick() {
     await updateWeather(getCityName());
-    let avalaibleCityNames = localStorage.getItem('cityNames');
-    let newCityNames = `${avalaibleCityNames},${getCityName()}`;
-    localStorage.setItem('cityNames', newCityNames);
-    await updateWeather(getCityName());
+    let avalaibleCityNames = getCitiesFromLocalStorage();
+    const currentCityName = getCityName();
+    if(!avalaibleCityNames.includes(currentCityName) || avalaibleCityNames.length == 0){
+        avalaibleCityNames.push(currentCityName);
+        localStorage.setItem('cityNames', avalaibleCityNames);
+    }
+    updateCitiesMenu();
+    document.getElementById('cityName').value = '';
+}
+
+searchButton.addEventListener('click', onSearchButtonClick);
+searchButton.addEventListener('submit', onSearchButtonClick);
+
+//przycisk usuń ostatnie miasto
+function removeLastCity() {
+    let cities = getCitiesFromLocalStorage();
+    cities.pop();
+    if(cities.length == 0){
+        localStorage.clear();
+    } else {
+        localStorage.setItem('cityNames', cities);
+    }
+}
+
+document.getElementById('removeCity').addEventListener('click', function() {
+    removeLastCity();
     updateCitiesMenu();
 });
 
-//przycisk usuń ostatnie miasto
-// function removeLastCity() {
-//     // 
-// }
-
-// document.getElementById('removeCity').addEventListener('click', function() {
-//     removeLastCity();
-// });
-
 
 function getCitiesFromLocalStorage() {
-    return localStorage.getItem('cityNames').split(',');
+    const cities = localStorage.getItem('cityNames');
+    if(cities){
+        return localStorage.getItem('cityNames').split(',');
+    } else {
+        return [];
+    }    
 }
 
 function updateCitiesMenu() {
@@ -63,13 +114,32 @@ function updateCitiesMenu() {
     cities.forEach(cityId => {
         document.getElementById(cityId).addEventListener('click', async () => {
             await updateWeather(cityId);
+            localStorage.setItem('currentCity', cityId);
         });
     })
 }
 
-//dodać if do citiesMenu, żeby uniknąć powtórzenia 
 
 updateCitiesMenu();
-const firstCity = getCitiesFromLocalStorage()[0];
-updateWeather(firstCity);
+const cities = getCitiesFromLocalStorage();
+if(cities.length !== 0){
+    const currentCity = localStorage.getItem('currentCity');
+    updateWeather(currentCity);
+}
+
+setInterval(()=>{
+    const currentCity = localStorage.getItem('currentCity');
+    updateWeather(currentCity);
+}, FIVE_MINUTES);
+
+
+setInterval(() =>{
+    if(getCitiesFromLocalStorage().length >= 10){
+        document.getElementById('cityName').disabled = true;
+        document.getElementById('searchButton').disabled = true;
+    } else {
+        document.getElementById('cityName').disabled = false;
+        document.getElementById('searchButton').disabled = false;
+    }
+}, 50);
 
