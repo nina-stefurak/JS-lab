@@ -4,7 +4,7 @@ let timerElement = document.getElementById("timer");
 let scoreElement = document.getElementById("score");
 let startButton = document.getElementById("startButton");
 let restartButton = document.getElementById("restartButton");
-let container = document.querySelector(".game-container");
+let gameContainer = document.querySelector(".game-container");
 let gameStart = false;
 let score = 0;
 let timeLeft = 60;
@@ -40,19 +40,25 @@ function restartGame() {
 
 function moveBall() {
     window.addEventListener('deviceorientation', (event) => {
-        let x = Math.max(Math.min(event.gamma, 45), -45) / 45 * (container.offsetWidth - ball.offsetWidth);
-        let y = Math.max(Math.min(event.beta, 45), -45) / 45 * (container.offsetHeight - ball.offsetHeight);
-        ball.style.left = x + 'px';
-        ball.style.top = y + 'px';
+        let maxX = gameContainer.offsetWidth - ball.offsetWidth;
+        let maxY = gameContainer.offsetHeight - ball.offsetHeight;
+
+        let x = Math.max(Math.min(event.gamma, 45), -45) / 45 * maxX;
+        let y = Math.max(Math.min(event.beta, 45), -45) / 45 * maxY;
+        ball.style.left = Math.min(Math.max(x, 0), maxX) + 'px';
+        ball.style.top = Math.min(Math.max(y, 0), maxY) + 'px';
+
         checkCollision();
     });
 }
 
 function spawnHole() {
+    let maxX = gameContainer.offsetWidth - hole.offsetWidth;
+    let maxY = gameContainer.offsetHeight - hole.offsetHeight;
     let x, y;
     do {
-        x = Math.random() * (container.offsetWidth - hole.offsetWidth);
-        y = Math.random() * (container.offsetHeight - hole.offsetHeight);
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
     } while (isTooCloseToBall(x, y));
 
     hole.style.left = x + 'px';
