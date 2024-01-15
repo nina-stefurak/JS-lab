@@ -9,6 +9,8 @@ let gameStart = false;
 let score = 0;
 let timeLeft = 60;
 let interval;
+let lastGamma = 0;
+let lastBeta = 0;
 
 function startGame() {
     gameStart = true;
@@ -23,6 +25,7 @@ function startGame() {
     moveBall();
     spawnHole();
     countDown();
+    requestAnimationFrame(updateBallPosition);
 }
 
 function restartGame() {
@@ -40,16 +43,25 @@ function restartGame() {
 
 function moveBall() {
     window.addEventListener('deviceorientation', (event) => {
+        lastGamma = event.gamma;
+        lastBeta = event.beta;
+    });
+}
+
+function updateBallPosition() {
+    if (gameStart) {
         let maxX = gameContainer.offsetWidth - ball.offsetWidth;
         let maxY = gameContainer.offsetHeight - ball.offsetHeight;
 
-        let x = Math.max(Math.min(event.gamma, 45), -45) / 45 * maxX;
-        let y = Math.max(Math.min(event.beta, 45), -45) / 45 * maxY;
+        let x = Math.max(Math.min(lastGamma, 45), -45) / 45 * maxX;
+        let y = Math.max(Math.min(lastBeta, 45), -45) / 45 * maxY;
+
         ball.style.left = Math.min(Math.max(x, 0), maxX) + 'px';
         ball.style.top = Math.min(Math.max(y, 0), maxY) + 'px';
 
         checkCollision();
-    });
+        requestAnimationFrame(updateBallPosition);
+    }
 }
 
 function spawnHole() {
@@ -94,6 +106,26 @@ function updateTimer() {
     timerElement.innerText = "Time: " + timeLeft;
 }
 
+function saveScore(score) {
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    scores.push(score);
+    localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+function showScores() {
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    scores.sort((a, b) => b - a);
+
+    let scoresList = document.getElementById('scoresList');
+    scoresList.innerHTML = ''; 
+
+    scores.forEach((score, index) => {
+        let listItem = document.createElement('li');
+        listItem.textContent = `Miejsce ${index + 1}: ${score}`;
+        scoresList.appendChild(listItem);
+    });
+}
+
 function countDown() {
     interval = setInterval(() => {
         if (!gameStart) {
@@ -109,6 +141,11 @@ function countDown() {
             clearInterval(interval);
             restartButton.style.display = "inline";
             alert("Game over! Your score: " + score);
+            saveScore(score);
+            showScores();
         }
     }, 1000);
 }
+document.addEventListener('DOMContentLoaded', function() {
+    showScores();
+});
