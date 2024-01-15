@@ -33,7 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function displayNotes() {
-        notesList.innerHTML = notes.map(note => `
+    const sortedNotes = notes.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return 0;
+    });
+        notesList.innerHTML = sortedNotes.map(note => `
             <div class="note" style="border-left-color: ${note.color}" data-id="${note.id}">
                 <div class="note-header">
                     <h2>${note.title}</h2>

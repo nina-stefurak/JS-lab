@@ -108,6 +108,7 @@ html, body {
     max-width: 600px; 
     word-wrap: break-word;
     overflow: hidden;
+    min-width: 250px;
 }
 
 .note-header {
