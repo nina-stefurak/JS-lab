@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
     const noteForm = document.querySelector('.note-form');
     const notesList = document.querySelector('.notes-list');
     const searchBox = document.querySelector('.search-box');
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchBox.addEventListener('input', handleSearch);
 
     function handleFormSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); 
         const noteData = {
             id: editingNoteId || Date.now(),
             title: document.getElementById('noteTitle').value,
@@ -97,5 +96,4 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     displayNotes();
-}); 
 

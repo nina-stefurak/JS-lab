@@ -31,8 +31,7 @@ function stopRecording() {
 function playRecord(channel) {
   records[channel].forEach(note => {
       setTimeout(() => {
-          const event = new KeyboardEvent('keydown', { keyCode: note.keyCode });
-          playSound(event);
+          playSound(note);
       }, note.time);
   });
 }
