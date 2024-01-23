@@ -2,8 +2,8 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let raf;
 
-let ballsCount = 70;
-let lineLength = 100;
+let ballsCount = 100;
+let lineLength = 130;
 const balls = [];
 
 let mouse = { 
@@ -17,8 +17,6 @@ function(event) {
   let rect = canvas.getBoundingClientRect(); //metoda pobiera rozmiar elementu oraz jego pozycji i zwraca obiekt DOMRect, który zawiera informacje o pozycji
   mouse.x = event.clientX - rect.left;
   mouse.y = event.clientY - rect.top;
-  // mouse.x = event.x;
-  // mouse.y = event.y;
  });
 
 class Ball {
@@ -28,14 +26,13 @@ class Ball {
     this.vx = Math.random() * 3 - 1;
     this.vy = Math.random() * 3 - 1;
     this.radius = Math.random() * 6 + 1;
-    // this.color = "white";
   }
 
   drawBall() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
     ctx.closePath();
-    ctx.fillStyle = 'white';;
+    ctx.fillStyle = 'white';
     ctx.fill();
   }
 
@@ -73,12 +70,6 @@ class Ball {
     this.interactWithCursor();
 
   }
-
-  // isNear(otherBall) {
-  //   const dx = this.x - otherBall.x;
-  //   const dy = this.y - otherBall.y;
-  //   return dx * dx + dy * dy < lineLength * lineLength;
-  // } //1
 
   isNear(otherBall) {
     const dx = this.x - otherBall.x;
@@ -138,8 +129,6 @@ function drawLines() {
   }
 }
 
-
-
 function updateCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBalls();
@@ -149,8 +138,8 @@ function updateCanvas() {
 }
 
 function startAnimation() {
-  ballsCount = parseInt(document.getElementById("ballsCount").value) || 70;
-  lineLength = parseInt(document.getElementById("lineLength").value) || 100;
+  ballsCount = parseInt(document.getElementById("ballsCount").value) || 100;
+  lineLength = parseInt(document.getElementById("lineLength").value) || 130;
   createOrUpdateBalls();
   if (raf) {
     cancelAnimationFrame(raf);
@@ -162,8 +151,8 @@ function resetAnimation() {
   if (raf) cancelAnimationFrame(raf);
   balls.length = 0;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  document.getElementById("ballsCount").value = '70';
-  document.getElementById("lineLength").value = '100';
+  document.getElementById("ballsCount").value = '100';
+  document.getElementById("lineLength").value = '130';
 }
 
 //mouse out event
