@@ -1,4 +1,4 @@
-const apiKey = '5134d627e2df6937d6d89fcd761a4817';
+const apiKey = '0a6456e38ba6968f9d2a83afbff752b7';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 function getCityName() {
@@ -76,7 +76,6 @@ async function onSearchButtonClick() {
 }
 
 searchButton.addEventListener('click', onSearchButtonClick);
-searchButton.addEventListener('submit', onSearchButtonClick);
 
 //przycisk usuń ostatnie miasto
 function removeLastCity() {

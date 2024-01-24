@@ -97,20 +97,6 @@ function drawBalls() {
   balls.forEach(ball => ball.drawBall());
 }
 
-// function drawLines() { //1 rysuję pomiędzy kulkami zwykłe linie
-//   ctx.strokeStyle = 'white';
-//   for (let i = 0; i < balls.length; i++) {
-//     for (let j = i + 1; j < balls.length; j++) {
-//       if (balls[i].isNear(balls[j])) {
-//         ctx.beginPath();
-//         ctx.moveTo(balls[i].x, balls[i].y);
-//         ctx.lineTo(balls[j].x, balls[j].y);
-//         ctx.stroke();
-//         ctx.closePath();
-//       }
-//     }
-//   }
-// }
 function drawLines() {
   ctx.strokeStyle = 'white';
   for (let i = 0; i < balls.length; i++) {
