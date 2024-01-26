@@ -40,3 +40,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     przeliczBtn.addEventListener("click", przelicz);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+const numbers = [1, 2, 3, 4];
+
+
+//methot 1: Using forEach() loop
+let sum1 = 0;
+numbers.forEach(i => sum1 += i);
+console.log('sum1 = ' + sum1);
+
+
+//method 2: Using reduce() method
+const sum2 = numbers.reduce((sum, val) => sum + val, 0 );
+console.log('sum2 = ' + sum2);
+
+
+///reduce
+const result = numbers.reduce((sum, value) => {
+    return sum + value;
+})
+console.log('sum reduce = ' + result);
+
+
+
+//method 3: Using eval() function not recomended
+const sum3 = eval(numbers.join("+"));
+console.log('sum3 = ' + sum3);
+
+
+
+//method 4: for loop
+let sum4 = 0;
+
+for(let i = 0; i < numbers.length; i++){
+    sum4 += numbers[i]
+}
+console.log('sum4 = ' + sum4);

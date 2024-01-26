@@ -4,7 +4,8 @@ function playSound(sound) {
   if (!audio) return;
   audio.currentTime = 0;
   audio.play();
-  key.classList.add('playing');
+  key.classList.add('playing'); //dodaje animacje
+  
   if (isRecording) {
       const now = Date.now();
       const timeElapsed = now - recordStartTime;
@@ -61,7 +62,7 @@ window.addEventListener('keydown', playSound);
 const keys = document.querySelectorAll('.key');
 keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
-function removeTransition(sound) {
+function removeTransition(sound) { //koniec animacji
   if (sound.propertyName !== 'transform') return;
   this.classList.remove('playing');
 }

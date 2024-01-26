@@ -19,7 +19,6 @@ function startGame() {
     ball.style.left = "10px";
     ball.style.top = "10px";
     startButton.style.display = "none";
-    restartButton.style.display = "none";
     updateScore();
     updateTimer();
     moveBall();
@@ -30,32 +29,25 @@ function startGame() {
 
 function restartGame() {
     clearInterval(interval);
-    gameStart = true;
-    score = 0;
-    timeLeft = 60;
-    ball.style.left = "10px";
-    ball.style.top = "10px";
-    updateScore();
-    updateTimer();
-    spawnHole();
-    countDown();
+    startGame()
 }
 
 function moveBall() {
     window.addEventListener('deviceorientation', (event) => {
-        lastGamma = event.gamma;
-        lastBeta = event.beta;
+        lastGamma = event.gamma; //y
+        lastBeta = event.beta; //x
     });
 }
 
 function updateBallPosition() {
     if (gameStart) {
-        let maxX = gameContainer.offsetWidth - ball.offsetWidth;
+// odjecie tych wartosci zapobiega wyjściu piłki za granicy kontenera
+        let maxX = gameContainer.offsetWidth - ball.offsetWidth; //maksymalna odległość, na jaką piłka może się przesunąć
         let maxY = gameContainer.offsetHeight - ball.offsetHeight;
 
         let x = Math.max(Math.min(lastGamma, 45), -45) / 45 * maxX;
         let y = Math.max(Math.min(lastBeta, 45), -45) / 45 * maxY;
-
+//aktualizuje style css dla piłki
         ball.style.left = Math.min(Math.max(x, 0), maxX) + 'px';
         ball.style.top = Math.min(Math.max(y, 0), maxY) + 'px';
 
@@ -73,22 +65,23 @@ function spawnHole() {
         y = Math.random() * maxY;
     } while (isTooCloseToBall(x, y));
 
-    hole.style.left = x + 'px';
-    hole.style.top = y + 'px';
+    hole.style.left = x + 'px';//aktualizuje styl CSS
+    hole.style.top = y + 'px';//konwertuje liczby na stringi, dodając pikseli,
 }
 
 function isTooCloseToBall(x, y) {
     const minDistance = 50;
-    let ballX = parseInt(ball.style.left, 10);
+    let ballX = parseInt(ball.style.left, 10);//pobieram aktualną pozycję piłki
     let ballY = parseInt(ball.style.top, 10);
 
     return Math.abs(ballX - x) < minDistance && Math.abs(ballY - y) < minDistance;
+    //obliczam bezwzględną różnicę między współrzędnymi `x` i `y` dziury a współrzędnymi piłki
 }
 
 function checkCollision() {
-    let ballRect = ball.getBoundingClientRect();
+    let ballRect = ball.getBoundingClientRect();//pobiera prostokątne granicy piłki i dziury
     let holeRect = hole.getBoundingClientRect();
-    if (ballRect.left < holeRect.left + holeRect.width &&
+    if (ballRect.left < holeRect.left + holeRect.width &&//czy krawędzie prostokąta piłki znajdują się wewnątrz prostokąta dziury
         ballRect.left + ballRect.width > holeRect.left &&
         ballRect.top < holeRect.top + holeRect.height &&
         ballRect.height + ballRect.top > holeRect.top) {

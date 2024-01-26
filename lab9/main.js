@@ -14,7 +14,7 @@ radius: 80
 
 canvas.addEventListener('mousemove', 
 function(event) {
-  let rect = canvas.getBoundingClientRect(); //metoda pobiera rozmiar elementu oraz jego pozycji i zwraca obiekt DOMRect, który zawiera informacje o pozycji
+  let rect = canvas.getBoundingClientRect(); //ta metoda pobiera rozmiar elementu i pozycje i zwraca obiekt DOMRect, który zawiera informacje o pozycji
   mouse.x = event.clientX - rect.left;
   mouse.y = event.clientY - rect.top;
  });

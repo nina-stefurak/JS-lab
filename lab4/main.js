@@ -1,11 +1,14 @@
     const noteForm = document.querySelector('.note-form');
     const notesList = document.querySelector('.notes-list');
     const searchBox = document.querySelector('.search-box');
+
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
     let editingNoteId = null;
 
     noteForm.addEventListener('submit', handleFormSubmit);
     searchBox.addEventListener('input', handleSearch);
+
+
 
     function handleFormSubmit(e) {
         e.preventDefault(); 
@@ -21,11 +24,12 @@
         if (editingNoteId) {
             const noteIndex = notes.findIndex(note => note.id === editingNoteId);
             notes[noteIndex] = { ...notes[noteIndex], ...noteData };
+            // ... tworzy nowy obiekt notatki, 
         } else {
-            notes.push(noteData);
+            notes.push(noteData); 
         }
     
-        localStorage.setItem('notes', JSON.stringify(notes));
+        localStorage.setItem('notes', JSON.stringify(notes)); //localStorage z nową tablicą notes`. 
         displayNotes();
         noteForm.reset();
         editingNoteId = null;
@@ -36,7 +40,7 @@
         const filteredNotes = notes.filter(note => 
             note.title.toLowerCase().includes(searchText) || 
             note.content.toLowerCase().includes(searchText) || 
-            note.tags.some(tag => tag.toLowerCase().includes(searchText))
+            note.tags.some(tag => tag.toLowerCase().includes(searchText)) //Metoda some zwraca `true`
         );
         displayNotes(filteredNotes);
     }
@@ -45,7 +49,7 @@
     let notesToShow = [];
     if(filteredNotes){
         notesToShow = filteredNotes;
-    } else {
+    } else { 
         const sortedNotes = notes.sort((a, b) => {
             if (a.pinned && !b.pinned) return -1;
             if (!a.pinned && b.pinned) return 1;
@@ -53,6 +57,8 @@
         });
         notesToShow = sortedNotes;
     }
+    //Używam `map` do stworzenia ciągu HTML dla każdej notatki
+    //a następnie `innerHTML ` do wstawienia tego ciągu do DOM
         notesList.innerHTML = notesToShow.map(note => `
             <div class="note" style="border-left-color: ${note.color}" data-id="${note.id}" id="${note.id}">
                 <div class="note-header">
@@ -79,7 +85,7 @@
             </div>
         `).join('');
     }
-    window.editNote = (noteId) => {
+    window.editNote = (noteId) => { 
         const noteToEdit = notes.find(note => note.id === noteId);
         document.getElementById('noteTitle').value = noteToEdit.title;
         document.getElementById('noteContent').value = noteToEdit.content;
@@ -91,7 +97,7 @@
 
     window.deleteNote = (noteId) => {
         notes = notes.filter(note => note.id !== noteId);
-        localStorage.setItem('notes', JSON.stringify(notes));
+        localStorage.setItem('notes', JSON.stringify(notes));//aktualizuje tablice notes w lokal storage
         displayNotes();
     };
 

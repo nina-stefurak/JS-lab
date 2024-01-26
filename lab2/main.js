@@ -30,6 +30,7 @@ const autoSlide = () => {
 const slideImage = () => {
   currentSlide = currentSlide === images.length ? 0 : currentSlide < 0 ? images.length - 1 : currentSlide;
   slides.style.transform = `translate(-${currentSlide * 100}%)`;
+  console.log("Current slide:" +  currentSlide);
   updateDots(); 
 };
 
